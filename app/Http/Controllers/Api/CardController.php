@@ -32,7 +32,7 @@ class CardController extends Controller
 
         if(!$board)
         {
-            return response()->json(['message' => 'Something went wrong'], 200);
+            return response()->json(['message' => 'Something went wrong'], 500);
         }
 
         $card = new Card();
