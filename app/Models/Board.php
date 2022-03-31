@@ -8,6 +8,6 @@ class Board extends Model
 {
     public function cards()
     {
-        return $this->hasMany(Card::class, 'board_id')->withTrashed()->orderBy('order', 'ASC');
+        return $this->hasMany(Card::class, 'board_id')->orderBy('order', 'ASC');
     }
 }
