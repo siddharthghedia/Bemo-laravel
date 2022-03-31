@@ -25,7 +25,7 @@ class BoardController extends Controller
         $board->name = $request->get('name');
         $board->save();
 
-        return response()->json([$board],200);
+        return response()->json($board,200);
     }
 
     public function delete(Request $request)

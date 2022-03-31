@@ -42,7 +42,7 @@ class CardController extends Controller
         $card->order = $request->get('order');
         $card->save();
 
-        return response()->json([$card], 200);
+        return response()->json($card, 200);
     }
 
     public function update(Request $request)
@@ -73,7 +73,7 @@ class CardController extends Controller
         $card->order = $request->get('order');
         $card->save();
 
-        return response()->json([$card], 200);
+        return response()->json($card, 200);
     }
 
     public function delete(Request $request)
