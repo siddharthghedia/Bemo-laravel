@@ -38,5 +38,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/create-card', [\App\Http\Controllers\Api\CardController::class, 'create']);
     Route::post('/update-card', [\App\Http\Controllers\Api\CardController::class, 'update']);
     Route::post('/delete-card', [\App\Http\Controllers\Api\CardController::class, 'delete']);
+    Route::post('/order-cards', [\App\Http\Controllers\Api\CardController::class, 'order']);
 });
 

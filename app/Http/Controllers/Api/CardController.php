@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
-    public function list()
+    public function list(Request $request)
     {
+//        if($request->get(''))
         $boards = Board::with('cards')->where('user_id', auth()->user()->id)->get();
         return response()->json($boards, 200);
     }
@@ -99,5 +100,17 @@ class CardController extends Controller
         }
 
         return response()->json(['message' => 'something went wrong'], 500);
+    }
+
+    public function order(Request  $request)
+    {
+        foreach($request->get('cards') as $item)
+        {
+            $card = Card::find($item['id']);
+            $card->order = $item['order'];
+            $card->save();
+        }
+
+        return response()->json(['message' => 'card order updated'], 200);
     }
 }
