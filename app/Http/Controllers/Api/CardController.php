@@ -22,7 +22,7 @@ class CardController extends Controller
                 return $q->get();
             });
             $query->when($request->get('status') == 'null', function ($q) use($request){
-                return $q->withTrashed();
+                return $q->withTrashed()->get();
             });
         }])->where('user_id', auth()->user()->id)->get();
 
