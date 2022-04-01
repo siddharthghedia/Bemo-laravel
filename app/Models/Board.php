@@ -10,4 +10,9 @@ class Board extends Model
     {
         return $this->hasMany(Card::class, 'board_id')->orderBy('order', 'ASC');
     }
+
+    public function allCards()
+    {
+        return $this->hasMany(Card::class, 'board_id')->orderBy('order', 'ASC')->withTrashed();
+    }
 }
