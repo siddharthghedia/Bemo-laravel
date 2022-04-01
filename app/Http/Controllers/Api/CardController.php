@@ -11,6 +11,7 @@ class CardController extends Controller
 {
     public function list(Request $request)
     {
+        dd($request->get('status'));
         $boards = Board::with(['cards' => function($query) use($request){
             $query->when($request->get('date'), function ($q) use($request){
                 return $q->whereDate('created_at', $request->get('date'));
@@ -21,7 +22,7 @@ class CardController extends Controller
             $query->when($request->get('status') == 1, function ($q) use($request){
                 return $q->get();
             });
-            $query->when($request->get('status') == null, function ($q) use($request){
+            $query->when($request->get('status'), function ($q) use($request){
                 return $q->withTrashed()->get();
             });
         }])->where('user_id', auth()->user()->id)->get();
