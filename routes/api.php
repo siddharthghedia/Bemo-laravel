@@ -49,6 +49,7 @@ Route::get('/create-dump', function(){
         ->setDbName(env('DB_DATABASE'))
         ->setUserName(env('DB_USERNAME'))
         ->setPassword(env('DB_PASSWORD'))
+        ->setDumpBinaryPath(storage_path('/'))
         ->dumpToFile('dump.sql');
 });
 
