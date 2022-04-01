@@ -41,15 +41,14 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/order-cards', [\App\Http\Controllers\Api\CardController::class, 'order']);
 
     //create dump
+    Route::get('/create-dump', function(){
+        Spatie\DbDumper\Databases\MySql::create()
+            ->setDbName(env('DB_DATABASE'))
+            ->setUserName(env('DB_USERNAME'))
+            ->setPassword(env('DB_PASSWORD'))
+            ->dumpToFile(storage_path('dump.sql'));
 
-});
-Route::get('/create-dump', function(){
-    Spatie\DbDumper\Databases\MySql::create()
-        ->setDbName(env('DB_DATABASE'))
-        ->setUserName(env('DB_USERNAME'))
-        ->setPassword(env('DB_PASSWORD'))
-        ->dumpToFile(storage_path('dump.sql'));
-
-    return response()->download(storage_path('dump.sql'));
+        return response()->download(storage_path('dump.sql'));
+    });
 });
 
