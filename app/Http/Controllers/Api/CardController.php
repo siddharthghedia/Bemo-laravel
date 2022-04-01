@@ -12,18 +12,18 @@ class CardController extends Controller
     public function list(Request $request)
     {
         $boards = Board::with(['cards' => function($query) use($request){
-            $query->when($request->get('date'), function ($q) use($request){
-                return $q->whereDate('created_at', $request->get('date'));
-            });
-            $query->when($request->get('status') == 0, function ($q) use($request){
-                return $q->onlyTrashed()->get();
-            });
-            $query->when($request->get('status') == 1, function ($q) use($request){
-                return $q->get();
-            });
-            $query->when($request->get('status') == 'null', function ($q) use($request){
-                return $q->query()->withTrashed()->get();
-            });
+//            $query->when($request->get('date'), function ($q) use($request){
+//                return $q->whereDate('created_at', $request->get('date'));
+//            });
+//            $query->when($request->get('status') == 0, function ($q) use($request){
+//                return $q->onlyTrashed()->get();
+//            });
+//            $query->when($request->get('status') == 1, function ($q) use($request){
+//                return $q->get();
+//            });
+//            $query->when($request->get('status') == 'null', function ($q) use($request){
+                return $query->withTrashed()->get();
+//            });
         }])->where('user_id', auth()->user()->id)->get();
 
         return response()->json($boards, 200);
