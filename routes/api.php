@@ -49,7 +49,6 @@ Route::get('/create-dump', function(){
         ->setDbName(env('DB_DATABASE'))
         ->setUserName(env('DB_USERNAME'))
         ->setPassword(env('DB_PASSWORD'))
-        ->doNotUseColumnStatistics()
         ->setDumpBinaryPath(storage_path('mysql-backup'))
         ->dumpToFile('dump.sql');
 });
