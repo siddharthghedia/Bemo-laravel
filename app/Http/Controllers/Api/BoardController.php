@@ -43,6 +43,7 @@ class BoardController extends Controller
         $board = Board::where(['user_id'=> auth()->user()->id, 'id' => $request->get('board_id')])->first();
         if($board)
         {
+            $board->cards->delete();
             $board->delete();
 
             return response()->json(['message' => 'board deleted successfully'], 200);
