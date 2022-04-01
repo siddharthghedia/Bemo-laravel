@@ -12,9 +12,9 @@ class CardController extends Controller
     public function list(Request $request)
     {
         $boards = Board::with(['cards' => function($query) use($request){
-//            $query->when($request->get('date'), function ($q) use($request){
-//                return $q->whereDate('created_at', $request->get('date'));
-//            });
+            $query->when($request->get('date'), function ($q) use($request){
+                return $q->whereDate('created_at', $request->get('date'));
+            });
             $query->when($request->get('status') === 0, function ($q) use($request){
                 return $q->onlyTrashed()->get();
             });
