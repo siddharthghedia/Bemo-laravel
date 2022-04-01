@@ -45,11 +45,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 });
 Route::get('/create-dump', function(){
     Spatie\DbDumper\Databases\MySql::create()
-        ->setHost(env('DB_HOST'))
         ->setDbName(env('DB_DATABASE'))
         ->setUserName(env('DB_USERNAME'))
         ->setPassword(env('DB_PASSWORD'))
-        ->setDumpBinaryPath('/usr/bin')
         ->dumpToFile('dump.sql');
 });
 
