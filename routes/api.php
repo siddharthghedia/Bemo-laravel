@@ -39,5 +39,16 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/update-card', [\App\Http\Controllers\Api\CardController::class, 'update']);
     Route::post('/delete-card', [\App\Http\Controllers\Api\CardController::class, 'delete']);
     Route::post('/order-cards', [\App\Http\Controllers\Api\CardController::class, 'order']);
+
+    //create dump
+
+});
+Route::get('/create-dump', function(){
+    Spatie\DbDumper\Databases\MySql::create()
+        ->setHost(env('DB_HOST'))
+        ->setDbName(env('DB_DATABASE'))
+        ->setUserName(env('DB_USERNAME'))
+        ->setPassword(env('DB_PASSWORD'))
+        ->dumpToFile('dump.sql');
 });
 
